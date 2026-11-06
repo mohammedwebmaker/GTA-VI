@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ocean Drive — a neon-noir driving game you can play in your browser</title>
+<meta name="description" content="Golden hour. A pink convertible. An endless Miami-style beach boulevard. Ocean Drive is a free, fan-made browser driving game built with Three.js — no download, no install.">
+<meta name="theme-color" content="#0a0614">
+<link rel="canonical" href="https://ordinary-revealed-violations-gmc.trycloudflare.com/">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ordinary-revealed-violations-gmc.trycloudflare.com/">
+<meta property="og:title" content="Ocean Drive — golden hour, endless boulevard">
+<meta property="og:description" content="A free fan-made neon driving game that runs in your browser. Take the pink convertible down the strip.">
+<meta property="og:image" content="https://ordinary-revealed-violations-gmc.trycloudflare.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ocean Drive — golden hour, endless boulevard">
+<meta name="twitter:description" content="A free fan-made neon driving game that runs in your browser.">
+<meta name="twitter:image" content="https://ordinary-revealed-violations-gmc.trycloudflare.com/assets/img/og.png">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav__inner container">
+    <a class="brand" href="#top" aria-label="Ocean Drive — home">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <defs>
+          <linearGradient id="brandSun" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#ff2f95"/>
+          </linearGradient>
+        </defs>
+        <circle cx="16" cy="16" r="13" fill="none" stroke="url(#brandSun)" stroke-width="1.6" opacity=".55"/>
+        <circle cx="16" cy="18" r="7" fill="url(#brandSun)"/>
+        <g stroke="#0a0614" stroke-width="1.6">
+          <line x1="9" y1="17" x2="23" y2="17"/><line x1="10" y1="20" x2="22" y2="20"/>
+        </g>
+      </svg>
+      <span class="brand__name">Ocean&nbsp;Drive</span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#strip">The strip</a>
+      <a href="#drive">Driving</a>
+      <a href="#controls">Controls</a>
+      <a href="#tech">Under the hood</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="share-btn" type="button" data-share>Share</button>
+      <a class="btn btn--primary btn--sm" href="play.html">
+        Play now
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero__bg" aria-hidden="true">
+    <svg class="scene" id="scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="640" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#0f0320"/>
+          <stop offset=".18" stop-color="#1d0736"/>
+          <stop offset=".36" stop-color="#4a105f"/>
+          <stop offset=".54" stop-color="#8c1d7c"/>
+          <stop offset=".68" stop-color="#d63a83"/>
+          <stop offset=".8" stop-color="#ff7d83"/>
+          <stop offset=".91" stop-color="#ffb583"/>
+          <stop offset="1" stop-color="#ffd9a4"/>
+        </linearGradient>
+        <linearGradient id="sunFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fffbe0"/>
+          <stop offset=".45" stop-color="#ffe07a"/>
+          <stop offset=".78" stop-color="#ffab45"/>
+          <stop offset="1" stop-color="#ff7a4d"/>
+        </linearGradient>
+        <radialGradient id="sunGlow">
+          <stop offset="0" stop-color="#ffc978" stop-opacity=".75"/>
+          <stop offset=".35" stop-color="#ff7d8e" stop-opacity=".38"/>
+          <stop offset=".7" stop-color="#ff2f95" stop-opacity=".16"/>
+          <stop offset="1" stop-color="#ff2f95" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="sea" x1="0" y1="640" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#ffc59a"/>
+          <stop offset=".12" stop-color="#ef8a8c"/>
+          <stop offset=".32" stop-color="#b64e83"/>
+          <stop offset=".62" stop-color="#662468"/>
+          <stop offset="1" stop-color="#280d3c"/>
+        </linearGradient>
+        <linearGradient id="seaReflect" x1="0" y1="640" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#ffe1a3" stop-opacity=".55"/>
+          <stop offset=".5" stop-color="#ff9c86" stop-opacity=".18"/>
+          <stop offset="1" stop-color="#ff6b9d" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="groundFade" x1="0" y1="620" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#0a0614" stop-opacity="0"/>
+          <stop offset=".55" stop-color="#0a0614" stop-opacity=".35"/>
+          <stop offset="1" stop-color="#0a0614" stop-opacity=".92"/>
+        </linearGradient>
+        <radialGradient id="horizonGlow" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#ffd9a4" stop-opacity=".85"/>
+          <stop offset="1" stop-color="#ffd9a4" stop-opacity="0"/>
+        </radialGradient>
+        <clipPath id="sunClip"><circle cx="1040" cy="468" r="188"/></clipPath>
+        <g id="frond">
+          <path d="M0 0 C 48 -30 112 -42 178 -16 C 120 6 56 12 0 0 Z" fill="#180620"/>
+          <path d="M0 0 C 52 -12 112 -14 176 -4 C 118 12 56 12 0 0 Z" fill="#120417" opacity=".6"/>
+        </g>
+        <g id="palm">
+          <path d="M-14 0 C -22 -140 -30 -330 -8 -520 L 12 -520 C -4 -330 2 -140 18 0 Z" fill="#150519"/>
+          <g transform="translate(2,-520)">
+            <use href="#frond" transform="rotate(-42)"/>
+            <use href="#frond" transform="rotate(-8) scale(.94)"/>
+            <use href="#frond" transform="rotate(28) scale(1.02)"/>
+            <use href="#frond" transform="rotate(66) scale(.9)"/>
+            <use href="#frond" transform="rotate(104) scale(.98)"/>
+            <use href="#frond" transform="rotate(142) scale(.88)"/>
+            <use href="#frond" transform="rotate(180) scale(1.04)"/>
+            <use href="#frond" transform="rotate(218) scale(.92)"/>
+            <use href="#frond" transform="rotate(256) scale(1)"/>
+          </g>
+          <circle cx="-10" cy="-508" r="11" fill="#150519"/>
+          <circle cx="14" cy="-500" r="9" fill="#150519"/>
+        </g>
+      </defs>
+
+      <rect width="1440" height="640" fill="url(#sky)"/>
+
+      <g class="stars" fill="#ffe9c9">
+        <circle cx="120" cy="70" r="1.6" opacity=".7"/><circle cx="268" cy="132" r="1.1" opacity=".5"/>
+        <circle cx="420" cy="54" r="1.4" opacity=".6"/><circle cx="556" cy="168" r="1" opacity=".45"/>
+        <circle cx="690" cy="92" r="1.8" opacity=".6"/><circle cx="812" cy="42" r="1.2" opacity=".5"/>
+        <circle cx="948" cy="120" r="1.4" opacity=".4"/><circle cx="1120" cy="66" r="1.1" opacity=".55"/>
+        <circle cx="1276" cy="150" r="1.7" opacity=".6"/><circle cx="1362" cy="60" r="1" opacity=".45"/>
+        <circle cx="196" cy="222" r="1.2" opacity=".35"/><circle cx="742" cy="238" r="1" opacity=".3"/>
+      </g>
+
+      <ellipse cx="1040" cy="640" rx="520" ry="90" fill="url(#horizonGlow)" opacity=".5"/>
+      <circle class="sun-halo" cx="1040" cy="468" r="360" fill="url(#sunGlow)"/>
+
+      <g clip-path="url(#sunClip)">
+        <circle class="sun-disc" cx="1040" cy="468" r="188" fill="url(#sunFill)"/>
+        <g fill="url(#sky)">
+          <rect x="840" y="520" width="400" height="7" opacity=".85"/>
+          <rect x="840" y="548" width="400" height="9" opacity=".85"/>
+          <rect x="840" y="580" width="400" height="12" opacity=".85"/>
+          <rect x="840" y="616" width="400" height="15" opacity=".85"/>
+          <rect x="840" y="656" width="400" height="18" opacity=".85"/>
+        </g>
+      </g>
+
+      <rect y="640" width="1440" height="260" fill="url(#sea)"/>
+      <rect x="830" y="640" width="420" height="260" fill="url(#seaReflect)"/>
+      <g class="shimmer" fill="#ffe6b8">
+        <rect x="960" y="652" width="150" height="2" opacity=".55"/>
+        <rect x="900" y="674" width="250" height="2" opacity=".4"/>
+        <rect x="985" y="700" width="120" height="3" opacity=".45"/>
+        <rect x="880" y="730" width="300" height="2" opacity=".3"/>
+        <rect x="1010" y="762" width="90" height="3" opacity=".35"/>
+        <rect x="920" y="800" width="220" height="4" opacity=".22"/>
+        <rect x="760" y="848" width="420" height="5" opacity=".16"/>
+      </g>
+
+      <ellipse cx="1040" cy="640" rx="520" ry="90" fill="url(#horizonGlow)" opacity=".5"/>
+
+      <g class="palms" opacity=".96">
+        <use href="#palm" transform="translate(1246,900) scale(1.08)"/>
+        <use href="#palm" transform="translate(1424,900) scale(.92) rotate(-4)"/>
+        <use href="#palm" transform="translate(84,900) scale(.78) rotate(3)"/>
+      </g>
+
+      <rect y="600" width="1440" height="300" fill="url(#groundFade)"/>
+    </svg>
+    <div class="hero__vignette"></div>
+    <div class="hero__scan"></div>
+    <div class="hero__grain"></div>
+  </div>
+
+  <div class="hero__inner container">
+    <p class="eyebrow"><span class="pulse-dot"></span> Fan-made · Runs in your browser</p>
+    <h1 class="hero__title">
+      <span class="hero__title-a">Ocean</span>
+      <span class="hero__title-b">Drive</span>
+    </h1>
+    <p class="hero__lede">
+      Golden hour on a Miami-style beach strip. A pink convertible, an endless
+      boulevard, and the sea on your right. No download, no loading screens —
+      just drive.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--primary btn--lg" href="play.html">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5-9-5.5Z" fill="currentColor"/></svg>
+        Start driving
+      </a>
+      <a class="btn btn--ghost btn--lg" href="#strip">Explore the strip</a>
+    </div>
+    <dl class="hero__meta">
+      <div><dt>Loop</dt><dd>3.2 km</dd></div>
+      <div><dt>Traffic</dt><dd>14 cars</dd></div>
+      <div><dt>Install</dt><dd>None</dd></div>
+      <div><dt>Play</dt><dd>Free</dd></div>
+    </dl>
+  </div>
+
+  <div class="hero__foot container">
+    <p class="coords"><span>25.7907° N · 80.1300° W</span><span class="coords__place">Miami Beach · 19:42</span></p>
+    <a class="scrollcue" href="#strip"><span>Scroll to explore</span><i aria-hidden="true"></i></a>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Endless boulevard</span><b>✦</b><span>Golden hour</span><b>✦</b><span>Pink convertible</span><b>✦</b><span>Neon signs</span><b>✦</b><span>Palm trees</span><b>✦</b><span>Sea breeze</span><b>✦</b><span>No install</span><b>✦</b>
+    <span>Endless boulevard</span><b>✦</b><span>Golden hour</span><b>✦</b><span>Pink convertible</span><b>✦</b><span>Neon signs</span><b>✦</b><span>Palm trees</span><b>✦</b><span>Sea breeze</span><b>✦</b><span>No install</span><b>✦</b>
+  </div>
+</div>
+
+<section class="strip section" id="strip">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="label"><span>01</span> The strip</p>
+      <div class="sec-head__body">
+        <h2>One boulevard.<br><em>No destination.</em></h2>
+        <p class="lede">
+          Ocean Drive is a single seamless stretch of coast that loops forever in
+          both directions. Buildings glow on one side, the Atlantic shimmers on
+          the other, and traffic keeps coming. There is no finish line and no fail
+          state — just you, the car, and the light.
+        </p>
+      </div>
+    </div>
+
+    <div class="strip__grid">
+      <div class="mapcard reveal" aria-hidden="true">
+        <div class="mapcard__bar">
+          <span><i class="live"></i> Strip map</span>
+          <span class="mono">IDLE · 00:00</span>
+        </div>
+        <svg class="mapcard__svg" viewBox="0 0 520 380">
+          <defs>
+            <linearGradient id="mapSea" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#0d2b3a"/><stop offset="1" stop-color="#12475a"/>
+            </linearGradient>
+            <pattern id="mapGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+              <path d="M26 0H0v26" fill="none" stroke="#ffffff" stroke-opacity=".05" stroke-width="1"/>
+            </pattern>
+            <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="520" height="380" fill="#0b0718"/>
+          <rect width="520" height="380" fill="url(#mapGrid)"/>
+          <rect x="402" width="118" height="380" fill="url(#mapSea)"/>
+          <path d="M402 0v380" stroke="#2ff3ff" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="6 6"/>
+          <g fill="#3a1d4e" opacity=".9">
+            <rect x="18" y="60" width="26" height="18"/><rect x="18" y="96" width="40" height="22"/>
+            <rect x="18" y="140" width="30" height="16"/><rect x="18" y="200" width="44" height="24"/>
+            <rect x="18" y="248" width="24" height="18"/><rect x="18" y="300" width="38" height="20"/>
+          </g>
+          <g fill="#ff2f95" opacity=".55">
+            <rect x="22" y="65" width="3" height="3"/><rect x="28" y="65" width="3" height="3"/>
+            <rect x="22" y="102" width="3" height="3"/><rect x="34" y="102" width="3" height="3"/>
+            <rect x="22" y="205" width="3" height="3"/><rect x="40" y="205" width="3" height="3"/>
+          </g>
+          <path d="M190 66 C 300 66 366 118 366 190 C 366 262 300 314 190 314 C 80 314 14 262 14 190 C 14 118 80 66 190 66 Z"
+                fill="none" stroke="#20142f" stroke-width="34"/>
+          <path d="M190 66 C 300 66 366 118 366 190 C 366 262 300 314 190 314 C 80 314 14 262 14 190 C 14 118 80 66 190 66 Z"
+                fill="none" stroke="#4a345f" stroke-width="1.5"/>
+          <path d="M190 66 C 300 66 366 118 366 190 C 366 262 300 314 190 314 C 80 314 14 262 14 190 C 14 118 80 66 190 66 Z"
+                fill="none" stroke="#ffd98a" stroke-opacity=".5" stroke-width="2" stroke-dasharray="10 12"/>
+          <g filter="url(#glow)">
+            <circle cx="190" cy="66" r="5.5" fill="#ff2f95">
+              <animateMotion dur="13s" repeatCount="indefinite" rotate="auto"
+                path="M190 66 C 300 66 366 118 366 190 C 366 262 300 314 190 314 C 80 314 14 262 14 190 C 14 118 80 66 190 66 Z"/>
+            </circle>
+          </g>
+          <g fill="#2ff3ff" opacity=".8">
+            <circle cx="300" cy="88" r="3"/><circle cx="352" cy="146" r="3"/><circle cx="352" cy="236" r="3"/>
+            <circle cx="248" cy="305" r="3"/><circle cx="88" cy="290" r="3"/><circle cx="28" cy="200" r="3"/>
+            <circle cx="70" cy="96" r="3"/>
+          </g>
+          <g fill="#ffd98a" opacity=".65">
+            <circle cx="330" cy="112" r="2.6"/><circle cx="360" cy="190" r="2.6"/><circle cx="300" cy="292" r="2.6"/>
+            <circle cx="120" cy="306" r="2.6"/><circle cx="22" cy="150" r="2.6"/><circle cx="150" cy="72" r="2.6"/>
+          </g>
+          <g font-family="Space Grotesk, sans-serif" font-size="10" letter-spacing="2" fill="#8c7fa3">
+            <text x="418" y="196" transform="rotate(90 418 196)">ATLANTIC OCEAN</text>
+            <text x="34" y="352">BUILDINGS</text>
+            <text x="300" y="352">BEACH</text>
+          </g>
+          <text x="196" y="190" text-anchor="middle" font-family="Monoton, sans-serif" font-size="26" fill="#fff5ea" opacity=".82">3,200 m</text>
+          <text x="196" y="212" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="9" letter-spacing="4" fill="#ff8fc4">SEAMLESS LOOP</text>
+        </svg>
+        <div class="mapcard__stats">
+          <div><span>Laps</span><b>∞</b></div>
+          <div><span>Traffic</span><b>14</b></div>
+          <div><span>Lanes</span><b>2</b></div>
+        </div>
+      </div>
+
+      <div class="strip__copy">
+        <article class="stat reveal">
+          <b class="stat__num">3,200<span>m</span></b>
+          <p>The boulevard wraps on itself, so the horizon never ends. Drive north or south — the strip keeps going.</p>
+        </article>
+        <article class="stat reveal">
+          <b class="stat__num">14</b>
+          <p>Traffic cars share the road, respawning ahead and behind you to keep the lanes alive.</p>
+        </article>
+        <article class="stat reveal">
+          <b class="stat__num">110<span>+</span></b>
+          <p>Palm trees, beach umbrellas and neon storefronts line the sand — all generated in code.</p>
+        </article>
+        <article class="stat reveal">
+          <b class="stat__num">∞</b>
+          <p>No timer, no score, no game over. The only thing you can lose is the sunset.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="drive section" id="drive">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="label"><span>02</span> Driving</p>
+      <div class="sec-head__body">
+        <h2>Built for the<br><em>long way home.</em></h2>
+        <p class="lede">
+          Arcade handling, a camera that leans into speed, and a world that only
+          exists while you're looking at it. Three things matter here: the car,
+          the road, and the light.
+        </p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <article class="card reveal">
+        <span class="card__no">01</span>
+        <svg class="card__icon" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M6 34 18 8M34 34 22 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 14v4M20 23v4M20 32v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h3>An endless boulevard</h3>
+        <p>The strip wraps at 3.2&nbsp;km, so the drive never dead-ends. Traffic respawns ahead and behind, and the palms keep rolling past the window.</p>
+        <ul class="card__list">
+          <li>Seamless world loop</li>
+          <li>Two-way traffic</li>
+          <li>No timers, no fail state</li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__no">02</span>
+        <svg class="card__icon" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="22" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 5v4M20 35v4M3 22h4M33 22h4M8 10l3 3M29 31l3 3M32 10l-3 3M11 31l-3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h3>Golden hour, every hour</h3>
+        <p>A layered sunset sky, a striped sun, candy-coloured art-deco blocks and a sea that catches the light. Every texture is painted on a canvas at load time.</p>
+        <ul class="card__list">
+          <li>Procedural sunset sky</li>
+          <li>Neon signage &amp; windows</li>
+          <li>Animated sea shimmer</li>
+        </ul>
+      </article>
+
+      <article class="card reveal">
+        <span class="card__no">03</span>
+        <svg class="card__icon" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M6 27h28M10 27v-6l4-6h12l4 6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="13" cy="28" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="27" cy="28" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M14 15h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h3>Drives like an arcade</h3>
+        <p>Grip, handbrake, drift and a speed-sensitive camera. Easy to pick up on the first corner, satisfying to push on the tenth lap.</p>
+        <ul class="card__list">
+          <li>Handbrake drifts</li>
+          <li>Mouse-look camera</li>
+          <li>Touch controls on mobile</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="controls section" id="controls">
+  <div class="container">
+    <div class="controls__head reveal">
+      <p class="label label--dark"><span>03</span> Controls</p>
+      <h2>Take the wheel.</h2>
+      <p class="lede">
+        Everything you need is under your left hand. Move the mouse to look
+        around the car — the camera follows where you look.
+      </p>
+    </div>
+
+    <div class="keys">
+      <div class="keys__row reveal">
+        <div class="keys__caps"><kbd>W</kbd><kbd>↑</kbd></div>
+        <div class="keys__text"><b>Throttle</b><span>Hold to accelerate. Release and the car coasts.</span></div>
+      </div>
+      <div class="keys__row reveal">
+        <div class="keys__caps"><kbd>S</kbd><kbd>↓</kbd></div>
+        <div class="keys__text"><b>Brake / Reverse</b><span>Tap to brake, hold at a stop to back up.</span></div>
+      </div>
+      <div class="keys__row reveal">
+        <div class="keys__caps"><kbd>A</kbd><kbd>D</kbd><kbd>←</kbd><kbd>→</kbd></div>
+        <div class="keys__text"><b>Steer</b><span>Steering tightens as speed drops — lean into it.</span></div>
+      </div>
+      <div class="keys__row reveal">
+        <div class="keys__caps"><kbd class="wide">Space</kbd></div>
+        <div class="keys__text"><b>Handbrake</b><span>Kills speed and lets the tail slide out.</span></div>
+      </div>
+      <div class="keys__row reveal">
+        <div class="keys__caps"><kbd>R</kbd></div>
+        <div class="keys__text"><b>Reset</b><span>Put the car back at the start of the strip.</span></div>
+      </div>
+      <div class="keys__row reveal">
+        <div class="keys__caps"><kbd>M</kbd></div>
+        <div class="keys__text"><b>Mute</b><span>Toggle the engine tone on and off.</span></div>
+      </div>
+      <div class="keys__row reveal">
+        <div class="keys__caps"><kbd class="wide">Mouse</kbd></div>
+        <div class="keys__text"><b>Look around</b><span>Move to orbit the camera. It drifts back after a moment.</span></div>
+      </div>
+      <div class="keys__row reveal">
+        <div class="keys__caps"><kbd class="wide">Esc</kbd></div>
+        <div class="keys__text"><b>Release cursor</b><span>Click the scene to capture the mouse again.</span></div>
+      </div>
+    </div>
+
+    <div class="tip reveal">
+      <span class="tip__badge">On a phone?</span>
+      <p>Turn the phone sideways and use the on-screen arrows to steer, accelerate and brake. Drag anywhere on the scene to look around the car.</p>
+      <a class="tip__link" href="play.html">Open the game <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="tech section" id="tech">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="label"><span>04</span> Under the hood</p>
+      <div class="sec-head__body">
+        <h2>Small page.<br><em>Big sky.</em></h2>
+        <p class="lede">
+          Ocean Drive is a single HTML page powered by Three.js and WebGL. Buildings,
+          palms, umbrellas and traffic are drawn with instanced meshes; the sunset,
+          the sea and the road are painted on a canvas at load time. Nothing to
+          install, nothing to download but the page itself.
+        </p>
+      </div>
+    </div>
+
+    <div class="tech__grid">
+      <div class="tech__list">
+        <div class="tech__item reveal">
+          <span class="tech__no">01</span>
+          <div><h3>Instanced everything</h3><p>Every palm, lamp, umbrella and building is one geometry drawn many times — hundreds of objects, a handful of draw calls.</p></div>
+        </div>
+        <div class="tech__item reveal">
+          <span class="tech__no">02</span>
+          <div><h3>Textures drawn in code</h3><p>Road markings, windows, neon signs and sea sparkle are generated with the 2D canvas API. There are no image assets to load.</p></div>
+        </div>
+        <div class="tech__item reveal">
+          <span class="tech__no">03</span>
+          <div><h3>WebGL renderer</h3><p>Three.js r128 with fog, hemisphere lighting and a low sun. The renderer targets 60&nbsp;fps and adapts its pixel ratio on smaller screens.</p></div>
+        </div>
+        <div class="tech__item reveal">
+          <span class="tech__no">04</span>
+          <div><h3>One page, no build step</h3><p>Plain JavaScript and a script tag. Open the file, or serve it from anywhere static — that is the whole deployment story.</p></div>
+        </div>
+      </div>
+
+      <div class="codecard reveal" aria-hidden="true">
+        <div class="codecard__bar">
+          <i></i><i></i><i></i>
+          <span>ocean-drive.html</span>
+        </div>
+        <pre><code><span class="c">// the whole world is generated at load</span>
+<span class="k">const</span> tex = (w, h, draw) =&gt; {
+  <span class="k">const</span> c = document.createElement(<span class="s">'canvas'</span>);
+  draw(c.getContext(<span class="s">'2d'</span>), w, h);
+  <span class="k">return new</span> THREE.CanvasTexture(c);
+};
+
+<span class="c">// one geometry, hundreds of palms</span>
+<span class="k">const</span> palms = <span class="k">new</span> THREE.InstancedMesh(
+  trunk, bark, items.length
+);
+
+<span class="c">// the sun hangs low over the sea</span>
+scene.fog = <span class="k">new</span> THREE.Fog(<span class="s">0xffd6a0</span>, <span class="n">80</span>, <span class="n">700</span>);</code></pre>
+        <div class="codecard__foot">
+          <span>three.js r128</span><span>~600 KB</span><span>0 assets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="play">
+  <div class="cta__sun" aria-hidden="true"></div>
+  <div class="container cta__inner reveal">
+    <p class="eyebrow"><span class="pulse-dot"></span> Ready when you are</p>
+    <h2 class="cta__title">The sun is low.<br><em>The keys are yours.</em></h2>
+    <p class="cta__lede">One click to start. Works on desktop and mobile, no account, no install.</p>
+    <div class="cta__actions">
+      <a class="btn btn--primary btn--lg" href="play.html">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5-9-5.5Z" fill="currentColor"/></svg>
+        Start driving
+      </a>
+      <button class="btn btn--ghost btn--lg" type="button" data-share>Share the drive</button>
+    </div>
+    <p class="cta__note">Tip: press <kbd>P</kbd> anywhere on this site to jump straight into the car.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <a class="brand" href="#top">
+          <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+            <circle cx="16" cy="16" r="13" fill="none" stroke="url(#brandSun)" stroke-width="1.6" opacity=".55"/>
+            <circle cx="16" cy="18" r="7" fill="url(#brandSun)"/>
+          </svg>
+          <span class="brand__name">Ocean&nbsp;Drive</span>
+        </a>
+        <p>A neon-noir driving escape. Built with Three.js, a canvas, and a very long sunset.</p>
+      </div>
+      <nav class="foot__nav" aria-label="Footer">
+        <div>
+          <h3>Game</h3>
+          <a href="play.html">Play now</a>
+          <a href="#controls">Controls</a>
+          <a href="#strip">The strip</a>
+        </div>
+        <div>
+          <h3>About</h3>
+          <a href="#drive">Driving</a>
+          <a href="#tech">Under the hood</a>
+          <button type="button" data-share>Share this page</button>
+        </div>
+      </nav>
+    </div>
+
+    <div class="foot__legal">
+      <p>
+        Ocean Drive is an independent, fan-made browser game. It is not affiliated
+        with, endorsed by, or connected to Rockstar Games or the Grand Theft Auto
+        series. No assets from any commercial game are used — every texture is
+        generated in code.
+      </p>
+      <p>
+        Built with <a href="https://threejs.org/" target="_blank" rel="noopener">Three.js</a>.
+        Set in <a href="https://fonts.google.com/specimen/Monoton" target="_blank" rel="noopener">Monoton</a>
+        &amp; <a href="https://fonts.google.com/specimen/Space+Grotesk" target="_blank" rel="noopener">Space Grotesk</a>
+        (SIL Open Font License). <span id="year">2026</span> · Fan project.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
